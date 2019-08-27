@@ -7,9 +7,17 @@ import ValueBox from "../common/widget/valueBox";
 import Row from "../common/layout/row";
 
 //REDUX
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
+// CUSTOM ACTIONS
+import { getSummary } from "../dashboard/dashboardActions";
+
 class Dashboard extends Component {
+  componentWillUnmount() {
+    this.props.getSummary;
+  }
+
   render() {
     const { credit, debt } = this.props.summary;
 
@@ -49,4 +57,9 @@ const mapStateToProps = state => ({
   summary: state.dashboard.summary
 });
 
-export default connect(mapStateToProps)(Dashboard);
+const mapDispatchToProps = dispatch => bindActionCreators(getSummary, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard);

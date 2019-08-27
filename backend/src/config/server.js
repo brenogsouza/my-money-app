@@ -15,6 +15,7 @@ const server = expres();
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 
+//configurando a PORTA
 server.listen(port, function() {
   console.log(`BACKEND is runnin on port ${port}.`);
 });

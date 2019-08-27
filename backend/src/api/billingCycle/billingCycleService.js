@@ -1,6 +1,9 @@
 const BillingCycle = require("./billingCycle");
+const errorHandler = require("../common/errorHandler");
 
 BillingCycle.methods(["get", "post", "put", "delete"]);
+
+BillingCycle.after("post", errorHandler).after("put", errorHandler);
 
 // Serviço que retornará a quantidade de elementos
 BillingCycle.route("count", (req, res, next) => {

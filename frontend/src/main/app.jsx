@@ -1,10 +1,13 @@
 import "../common/template/dependencies";
 import React from "react";
 
-const App = () => {
+// CUSTOM COMPONENTS
+import Header from "../common/template/header";
+
+const App = props => {
   return (
     <div className="wrapper">
-      <h1>ola mundo</h1>
+      <Header />
     </div>
   );
 };

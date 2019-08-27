@@ -1,33 +1,28 @@
 const restful = require("node-restful");
 const mongoose = restful.mongoose;
 
-// ciclo de pagamento
 const creditSchema = new mongoose.Schema({
   name: {
     type: String,
-    require: true
+    required: true
   },
   value: {
     type: Number,
     min: 0,
-    require: true
+    required: true
   }
 });
 
-// ciclo de debito
 const debtSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    require: true
-  },
+  name: { type: String, required: true },
   value: {
     type: Number,
     min: 0,
-    require: true
+    required: [true, "Informe o valor do débito!"]
   },
   status: {
     type: String,
-    require: false,
+    required: false,
     uppercase: true,
     enum: ["PAGO", "PENDENTE", "AGENDADO"]
   }
@@ -36,22 +31,22 @@ const debtSchema = new mongoose.Schema({
 const billingCycleSchema = new mongoose.Schema({
   name: {
     type: String,
-    require: true
+    required: true
   },
   month: {
     type: Number,
     min: 1,
     max: 12,
-    require: true
+    required: true
   },
   year: {
     type: Number,
     min: 1970,
     max: 2100,
-    require: true,
-    credits: [creditSchema],
-    debts: [debtSchema]
-  }
+    required: true
+  },
+  credits: [creditSchema],
+  debts: [debtSchema]
 });
 
-module.exports = restful.model("billingCycle", billingCycleSchema);
+module.exports = restful.model("BillingCycle", billingCycleSchema);

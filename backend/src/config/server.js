@@ -12,8 +12,12 @@ const expres = require("express");
 // constante referente ao server, que retorna um novo servidor
 const server = expres();
 
+// constante referente ao cabeçalho
+const allowCors = require("./cors");
+
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
+server.use(allowCors);
 
 //configurando a PORTA
 server.listen(port, function() {

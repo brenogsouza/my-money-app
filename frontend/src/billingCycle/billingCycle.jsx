@@ -6,13 +6,14 @@ import { connect } from "react-redux";
 import { selectTab, showTabs } from "../common/tab/tabActions";
 
 //CUSTOM COMPONENTS
-import ContentHeader from "../common/template/contentHeader";
 import Content from "../common/template/content";
-import Tabs from "../common/tab/tabs";
-import TabsHeader from "../common/tab/tabsHeader";
-import TabsContent from "../common/tab/tabsContent";
-import TabHeader from "../common/tab/tabHeader";
+import ContentHeader from "../common/template/contentHeader";
+import List from "./billingCycleList";
 import TabContent from "../common/tab/tabContent";
+import TabHeader from "../common/tab/tabHeader";
+import Tabs from "../common/tab/tabs";
+import TabsContent from "../common/tab/tabsContent";
+import TabsHeader from "../common/tab/tabsHeader";
 
 class BillingCycle extends Component {
   componentWillMount() {
@@ -34,7 +35,7 @@ class BillingCycle extends Component {
             </TabsHeader>
             <TabsContent>
               <TabContent id="tabList">
-                <h1>Lista</h1>
+                <List />
               </TabContent>
               <TabContent id="tabCreate">
                 <h1>Incluir</h1>

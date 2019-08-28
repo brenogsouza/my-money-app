@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // ACTIONS
-import { selectTab } from "../common/tab/tabActions";
+import { selectTab, showTabs } from "../common/tab/tabActions";
 
 //CUSTOM COMPONENTS
 import ContentHeader from "../common/template/contentHeader";
@@ -17,6 +17,7 @@ import TabContent from "../common/tab/tabContent";
 class BillingCycle extends Component {
   componentWillMount() {
     this.props.selectTab("tabList");
+    this.props.showTabs("tabList", "tabCreate");
   }
 
   render() {
@@ -53,7 +54,7 @@ class BillingCycle extends Component {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ selectTab }, dispatch);
+  bindActionCreators({ selectTab, showTabs }, dispatch);
 
 export default connect(
   null,

@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+//REDUX
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+// ACTIONS
+import { selectTab } from "../common/tab/tabActions";
 
 //CUSTOM COMPONENTS
 import ContentHeader from "../common/template/contentHeader";
@@ -9,7 +14,11 @@ import TabsContent from "../common/tab/tabsContent";
 import TabHeader from "../common/tab/tabHeader";
 import TabContent from "../common/tab/tabContent";
 
-class BillingCycles extends Component {
+class BillingCycle extends Component {
+  componentWillMount() {
+    this.props.selectTab("tabList");
+  }
+
   render() {
     return (
       <div>
@@ -42,4 +51,11 @@ class BillingCycles extends Component {
     );
   }
 }
-export default BillingCycles;
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ selectTab }, dispatch);
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(BillingCycle);

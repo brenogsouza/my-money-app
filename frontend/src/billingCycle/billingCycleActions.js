@@ -14,20 +14,22 @@ export function getList() {
   };
 }
 
-export function create(values) {
-  return dispatch => {
-    axios
-      .post(`${BASE_URL}/billingCycles`, values)
-      .then(res => {
-        toastr.success("Sucesso", "Operação realizada com sucesso!");
-        dispatch(init());
-      })
-      .catch(e => {
-        e.response.data.errors.forEach(error => toastr.error("Erro", error));
-      });
-  };
+// ACTION que inicia
+export function init() {
+  return [
+    showTabs("tabList", "tabCreate"),
+    selectTab("tabList"),
+    getList(),
+    initialize("billingCycleForm", INITIAL_VALUES)
+  ];
 }
 
+// ACTION que cria novo BC
+export function create(values) {
+  return submit(values, "post");
+}
+
+// ACTION que determina qual tabs será visualizada em atualizar
 export function showUpdate(billingCycle) {
   return [
     showTabs("tabUpdate"),
@@ -36,11 +38,22 @@ export function showUpdate(billingCycle) {
   ];
 }
 
-export function init() {
-  return [
-    showTabs("tabList", "tabCreate"),
-    selectTab("tabList"),
-    getList(),
-    initialize("billingCycleForm", INITIAL_VALUES)
-  ];
+// ACTION que determina a atualização do BC
+export function update(values) {
+  return submit(values, "put");
+}
+
+// Função que passa os valores e os metodos
+function submit(values, method) {
+  return dispatch => {
+    const id = values._id ? values._id : "";
+    axios[method](`${BASE_URL}/billingCycles/${id}`, values)
+      .then(res => {
+        toastr.success("Sucesso", "Operação realizada com sucesso!");
+        dispatch(init());
+      })
+      .catch(e => {
+        e.response.data.errors.forEach(error => toastr.error("Erro", error));
+      });
+  };
 }

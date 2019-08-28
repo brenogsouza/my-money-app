@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // ACTIONS
 import { selectTab, showTabs } from "../common/tab/tabActions";
-import { create, update } from "./billingCycleActions";
+import { create, update, remove } from "./billingCycleActions";
 
 //CUSTOM COMPONENTS
 import Content from "../common/template/content";
@@ -46,7 +46,7 @@ class BillingCycle extends Component {
                 <Form onSubmit={this.props.update} />
               </TabContent>
               <TabContent id="tabDelete">
-                <h1>Excluir</h1>
+                <Form onSubmit={this.props.remove} readOnly={true} />
               </TabContent>
             </TabsContent>
           </Tabs>
@@ -62,7 +62,8 @@ const mapDispatchToProps = dispatch =>
       selectTab,
       showTabs,
       create,
-      update
+      update,
+      remove
     },
     dispatch
   );

@@ -12,12 +12,13 @@ import Row from "../common/layout/row";
 
 class BillingCycleForm extends Component {
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, readOnly } = this.props;
     return (
       <form action="" role="form" onSubmit={handleSubmit}>
         <Row>
           <div className="box-body">
             <Field
+              readOnly={readOnly}
               name="name"
               component={labelAndInput}
               label="Nome"
@@ -25,6 +26,7 @@ class BillingCycleForm extends Component {
               placeholder="Informe o nome"
             />
             <Field
+              readOnly={readOnly}
               name="month"
               component={labelAndInput}
               label="Mês"
@@ -33,6 +35,7 @@ class BillingCycleForm extends Component {
               type="number"
             />
             <Field
+              readOnly={readOnly}
               name="year"
               component={labelAndInput}
               label="Ano"
@@ -44,7 +47,7 @@ class BillingCycleForm extends Component {
         </Row>
         <div className="box-footer">
           <button type="submit" className="btn btn-primary">
-            Incluir
+            Submit
           </button>
           <button
             type="button"

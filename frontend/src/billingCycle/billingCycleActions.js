@@ -38,6 +38,20 @@ export function showUpdate(billingCycle) {
   ];
 }
 
+// ACTION usada para remover uma BC
+export function remove(values) {
+  return submit(values, "delete");
+}
+
+// ACTION que determina qual tabs será visualizada em deletar
+export function showDelete(billingCycle) {
+  return [
+    showTabs("tabDelete"),
+    selectTab("tabDelete"),
+    initialize("billingCycleForm", billingCycle)
+  ];
+}
+
 // ACTION que determina a atualização do BC
 export function update(values) {
   return submit(values, "put");

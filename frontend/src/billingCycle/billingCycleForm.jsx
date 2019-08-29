@@ -15,7 +15,6 @@ import Summary from "./summary";
 
 class BillingCycleForm extends Component {
   calculateSummary() {
-    debugger;
     const sum = (t, v) => t + v;
     return {
       sumOfCredits: this.props.credits.map(c => +c.value || 0).reduce(sum),

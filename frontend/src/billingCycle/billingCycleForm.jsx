@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // Redux
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { reduxForm, Field } from "redux-form";
+import { reduxForm, Field, formValueSelector } from "redux-form";
 // ACTIONS
 import { init } from "../billingCycle/billingCycleActions";
 
@@ -13,7 +13,7 @@ import Row from "../common/layout/row";
 
 class BillingCycleForm extends Component {
   render() {
-    const { handleSubmit, readOnly } = this.props;
+    const { handleSubmit, readOnly, credits } = this.props;
     return (
       <form action="" role="form" onSubmit={handleSubmit}>
         <Row>
@@ -45,7 +45,7 @@ class BillingCycleForm extends Component {
               type="number"
             />
 
-            <CreditList cols="12 6" readOnly={readOnly} />
+            <CreditList cols="12 6" list={credits} readOnly={readOnly} />
           </div>
         </Row>
         <div className="box-footer">
@@ -70,8 +70,16 @@ BillingCycleForm = reduxForm({
   destroyOnUnmount: false
 })(BillingCycleForm);
 
+const selector = formValueSelector("billingCycleForm");
+
+// para passar o ID do formulário para passar o estado e o atributo para o form
+const mapStateToProps = state => ({
+  credits: selector(state, "credits")
+});
+
+// conectando minha actions
 const mapDispatchToProps = dispatch => bindActionCreators({ init }, dispatch);
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(BillingCycleForm);

@@ -1,12 +1,11 @@
 import React from "react";
 
-const Input = props => (
+export default props => (
   <input
     {...props.input}
-    className="form-control input-credits"
+    className="form-control"
     placeholder={props.placeholder}
     readOnly={props.readOnly}
     type={props.type}
   />
 );
-export default Input;

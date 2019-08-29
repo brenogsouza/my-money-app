@@ -5,10 +5,10 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.btn {
-  margin-right: 3px;
+button {
+  margin-right: 5px;
 }
 
-td.td-actions {
-  display: flex;
+.table-actions {
+  width: 150px;
 }

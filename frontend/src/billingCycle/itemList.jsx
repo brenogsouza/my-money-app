@@ -10,24 +10,21 @@ import Input from "../common/form/input";
 // REDUX
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import If from "../common/operador/if";
 
 class ItemList extends Component {
-  // adiciona um registro se não for somente leitura
   add(index, item = {}) {
     if (!this.props.readOnly) {
-      // id do formulário, nome do field, index para inserir elemento, e o valor
       this.props.arrayInsert("billingCycleForm", this.props.field, index, item);
     }
   }
 
-  // removendo um registro
   remove(index) {
     if (!this.props.readOnly && this.props.list.length > 1) {
       this.props.arrayRemove("billingCycleForm", this.props.field, index);
     }
   }
 
-  // renderiza linhas da tabela
   renderRows() {
     const list = this.props.list || [];
     return list.map((item, index) => (
@@ -48,30 +45,38 @@ class ItemList extends Component {
             readOnly={this.props.readOnly}
           />
         </td>
-        <td>
-          <td className="td-actions">
-            <button
-              type="button"
-              className="btn btn-success"
-              onClick={() => this.add(index + 1)}
-            >
-              <i className="fa fa-plus"></i>
-            </button>
-            <button
-              type="button"
-              className="btn btn-warning"
-              onClick={() => this.add(index + 1, item)}
-            >
-              <i className="fa fa-clone"></i>
-            </button>
-            <button
-              type="button"
-              className="btn btn-danger"
-              onClick={() => this.remove(index)}
-            >
-              <i className="fa fa-trash-o"></i>
-            </button>
+        <If test={this.props.showStatus}>
+          <td>
+            <Field
+              name={`${this.props.field}[${index}].status`}
+              component={Input}
+              placeholder="Informe o status"
+              readOnly={this.props.readOnly}
+            />
           </td>
+        </If>
+        <td className="td-actions">
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={() => this.add(index + 1)}
+          >
+            <i className="fa fa-plus"></i>
+          </button>
+          <button
+            type="button"
+            className="btn btn-warning"
+            onClick={() => this.add(index + 1, item)}
+          >
+            <i className="fa fa-clone"></i>
+          </button>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={() => this.remove(index)}
+          >
+            <i className="fa fa-trash-o"></i>
+          </button>
         </td>
       </tr>
     ));
@@ -87,6 +92,9 @@ class ItemList extends Component {
               <tr>
                 <th>Nome</th>
                 <th>Valor</th>
+                <If test={this.props.showStatus}>
+                  <th>Status</th>
+                </If>
                 <th className="table-actions">Ações</th>
               </tr>
             </thead>
@@ -100,7 +108,6 @@ class ItemList extends Component {
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ arrayInsert, arrayRemove }, dispatch);
-
 export default connect(
   null,
   mapDispatchToProps

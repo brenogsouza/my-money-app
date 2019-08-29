@@ -7,6 +7,7 @@ import { reduxForm, Field } from "redux-form";
 import { init } from "../billingCycle/billingCycleActions";
 
 // CUSTOM COMPONENTS
+import CreditList from "./creditList";
 import labelAndInput from "../common/form/labelAndInput";
 import Row from "../common/layout/row";
 
@@ -43,6 +44,8 @@ class BillingCycleForm extends Component {
               placeholder="Informe o ano"
               type="number"
             />
+
+            <CreditList cols="12 6" />
           </div>
         </Row>
         <div className="box-footer">

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 // REDUX FORM
-import { Field, arrayInsert } from "redux-form";
+import { Field, arrayInsert, arrayRemove } from "redux-form";
 
 // CUSTOM COMPONENTS
 import Grid from "../common/layout/grid";
@@ -17,6 +17,13 @@ class CreditList extends Component {
     if (!this.props.readOnly) {
       // id do formulário, nome do field, index para inserir elemento, e o valor
       this.props.arrayInsert("billingCycleForm", "credits", index, item);
+    }
+  }
+
+  // removendo um registro
+  remove(index) {
+    if (!this.props.readOnly && this.props.list.length > 1) {
+      this.props.arrayRemove("billingCycleForm", "credits", index);
     }
   }
 
@@ -42,7 +49,7 @@ class CreditList extends Component {
           />
         </td>
         <td>
-          <td>
+          <td className="td-actions">
             <button
               type="button"
               className="btn btn-success"
@@ -56,6 +63,13 @@ class CreditList extends Component {
               onClick={() => this.add(index + 1, item)}
             >
               <i className="fa fa-clone"></i>
+            </button>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => this.remove(index)}
+            >
+              <i className="fa fa-trash-o"></i>
             </button>
           </td>
         </td>
@@ -85,7 +99,7 @@ class CreditList extends Component {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ arrayInsert }, dispatch);
+  bindActionCreators({ arrayInsert, arrayRemove }, dispatch);
 
 export default connect(
   null,

@@ -12,8 +12,3 @@
 td.td-actions {
   display: flex;
 }
-
-fieldset {
-  display: flex;
-  flex-wrap: wrap;
-}

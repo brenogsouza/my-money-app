@@ -1,9 +1,25 @@
 import React, { Component } from "react";
+
+// REDUX FORM
+import { Field, arrayInsert } from "redux-form";
+
+// CUSTOM COMPONENTS
 import Grid from "../common/layout/grid";
-import { Field } from "redux-form";
 import Input from "../common/form/input";
 
+// REDUX
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+
 class CreditList extends Component {
+  // adiciona um registro se não for somente leitura
+  add(index, item = {}) {
+    if (!this.props.readOnly) {
+      // id do formulário, nome do field, index para inserir elemento, e o valor
+      this.props.arrayInsert("billingCycleForm", "credits", index, item);
+    }
+  }
+
   // renderiza linhas da tabela
   renderRows() {
     const list = this.props.list || [];
@@ -28,16 +44,18 @@ class CreditList extends Component {
         <td>
           <td>
             <button
-              className="btn btn-warning"
-              // onClick={() => this.props.showUpdate(bc)}
+              type="button"
+              className="btn btn-success"
+              onClick={() => this.add(index + 1)}
             >
-              <i className="fa fa-pencil"></i>
+              <i className="fa fa-plus"></i>
             </button>
             <button
-              className="btn btn-danger"
-              // onClick={() => this.props.showDelete(bc)}
+              type="button"
+              className="btn btn-warning"
+              onClick={() => this.add(index + 1, item)}
             >
-              <i className="fa fa-trash-o"></i>
+              <i className="fa fa-clone"></i>
             </button>
           </td>
         </td>
@@ -55,7 +73,7 @@ class CreditList extends Component {
               <tr>
                 <th>Nome</th>
                 <th>Valor</th>
-                <th>Ações</th>
+                <th className="table-actions">Ações</th>
               </tr>
             </thead>
             <tbody>{this.renderRows()}</tbody>
@@ -65,4 +83,11 @@ class CreditList extends Component {
     );
   }
 }
-export default CreditList;
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ arrayInsert }, dispatch);
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(CreditList);

@@ -9,45 +9,42 @@ import { init } from "../billingCycle/billingCycleActions";
 // CUSTOM COMPONENTS
 import CreditList from "./creditList";
 import labelAndInput from "../common/form/labelAndInput";
-import Row from "../common/layout/row";
 
 class BillingCycleForm extends Component {
   render() {
     const { handleSubmit, readOnly, credits } = this.props;
     return (
       <form action="" role="form" onSubmit={handleSubmit}>
-        <Row>
-          <div className="box-body">
-            <Field
-              readOnly={readOnly}
-              name="name"
-              component={labelAndInput}
-              label="Nome"
-              cols="12 4"
-              placeholder="Informe o nome"
-            />
-            <Field
-              readOnly={readOnly}
-              name="month"
-              component={labelAndInput}
-              label="Mês"
-              cols="12 4"
-              placeholder="Inform o mês"
-              type="number"
-            />
-            <Field
-              readOnly={readOnly}
-              name="year"
-              component={labelAndInput}
-              label="Ano"
-              cols="12 4"
-              placeholder="Informe o ano"
-              type="number"
-            />
+        <div className="box-body">
+          <Field
+            readOnly={readOnly}
+            name="name"
+            component={labelAndInput}
+            label="Nome"
+            cols="12 4"
+            placeholder="Informe o nome"
+          />
+          <Field
+            readOnly={readOnly}
+            name="month"
+            component={labelAndInput}
+            label="Mês"
+            cols="12 4"
+            placeholder="Inform o mês"
+            type="number"
+          />
+          <Field
+            readOnly={readOnly}
+            name="year"
+            component={labelAndInput}
+            label="Ano"
+            cols="12 4"
+            placeholder="Informe o ano"
+            type="number"
+          />
 
-            <CreditList cols="12 6" list={credits} readOnly={readOnly} />
-          </div>
-        </Row>
+          <CreditList cols="12 6" list={credits} readOnly={readOnly} />
+        </div>
         <div className="box-footer">
           <button type="submit" className="btn btn-primary">
             Submit
@@ -70,9 +67,9 @@ BillingCycleForm = reduxForm({
   destroyOnUnmount: false
 })(BillingCycleForm);
 
+// para passar o ID do formulário para passar o estado e o atributo para o form
 const selector = formValueSelector("billingCycleForm");
 
-// para passar o ID do formulário para passar o estado e o atributo para o form
 const mapStateToProps = state => ({
   credits: selector(state, "credits")
 });

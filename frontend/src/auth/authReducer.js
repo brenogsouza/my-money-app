@@ -20,6 +20,7 @@ export default (state = INITIAL_STATE, action) => {
           user: null
         };
       }
+
     case "USER_FETCHED":
       localStorage.setItem(userKey, JSON.stringify(action.payload));
       return {

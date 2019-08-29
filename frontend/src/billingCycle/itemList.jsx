@@ -11,6 +11,7 @@ import Input from "../common/form/input";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import If from "../common/operador/if";
+import Row from "../common/layout/row";
 
 class ItemList extends Component {
   add(index, item = {}) {
@@ -87,19 +88,21 @@ class ItemList extends Component {
       <Grid cols={this.props.cols}>
         <fieldset>
           <legend>{this.props.legend}</legend>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>Valor</th>
-                <If test={this.props.showStatus}>
-                  <th>Status</th>
-                </If>
-                <th className="table-actions">Ações</th>
-              </tr>
-            </thead>
-            <tbody>{this.renderRows()}</tbody>
-          </table>
+          <Row>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Valor</th>
+                  <If test={this.props.showStatus}>
+                    <th>Status</th>
+                  </If>
+                  <th className="table-actions">Ações</th>
+                </tr>
+              </thead>
+              <tbody>{this.renderRows()}</tbody>
+            </table>
+          </Row>
         </fieldset>
       </Grid>
     );

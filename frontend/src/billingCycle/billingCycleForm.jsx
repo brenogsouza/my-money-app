@@ -9,6 +9,7 @@ import { init } from "../billingCycle/billingCycleActions";
 // CUSTOM COMPONENTS
 import ItemList from "./itemList";
 import LabelAndInput from "../common/form/labelAndInput";
+import Summary from "./summary";
 
 class BillingCycleForm extends Component {
   render() {
@@ -42,6 +43,7 @@ class BillingCycleForm extends Component {
             placeholder="Informe o ano"
             type="number"
           />
+          <Summary credit={1000} debt={100} />
 
           <ItemList
             cols="12 6"

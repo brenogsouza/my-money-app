@@ -1,4 +1,3 @@
-import "../common/template/dependencies";
 import React from "react";
 
 // CUSTOM COMPONENTS

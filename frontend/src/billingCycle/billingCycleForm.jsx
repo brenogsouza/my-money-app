@@ -45,7 +45,7 @@ class BillingCycleForm extends Component {
               type="number"
             />
 
-            <CreditList cols="12 6" />
+            <CreditList cols="12 6" readOnly={readOnly} />
           </div>
         </Row>
         <div className="box-footer">

@@ -14,7 +14,6 @@ import { login, signup } from "./authActions";
 // CUSTOM COMPONENTS
 import Row from "../common/layout/row";
 import Grid from "../common/layout/grid";
-import If from "../common/operador/if";
 import Messages from "../common/msg/messages";
 import Input from "../common/form/input";
 
@@ -30,7 +29,7 @@ class Auth extends Component {
     this.setState({ loginMode: !this.state.loginMode });
   }
 
-  onSubmit() {
+  onSubmit(values) {
     const { login, signup } = this.props;
     this.state.loginMode ? login(values) : signup(values);
   }

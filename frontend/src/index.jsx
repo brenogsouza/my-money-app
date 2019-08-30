@@ -11,7 +11,7 @@ import multi from "redux-multi";
 import thunk from "redux-thunk";
 
 //CUSTOM COMPONENTS
-import App from "./main/app";
+import Routes from "./main/routes";
 
 //REDUCERS
 import reducers from "./main/reducers";
@@ -23,7 +23,7 @@ const store = applyMiddleware(promise, multi, thunk)(createStore)(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Routes />
   </Provider>,
   document.getElementById("app")
 );
